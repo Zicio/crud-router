@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useFetchApi = (endpoint) => {
+const useGetFetchApi = (endpoint) => {
   const url = `http://localhost:7777/${endpoint}`;
   const [status, setStatus] = useState({
     loading: false,
@@ -20,4 +20,4 @@ const useFetchApi = (endpoint) => {
   return { ...status, fetchData };
 };
 
-export default useFetchApi;
+export default useGetFetchApi;

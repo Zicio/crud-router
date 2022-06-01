@@ -1,11 +1,11 @@
 import { useState } from "react";
-// import useFetchApi from "../../Hooks/useFetchApi";
+import usePostFetchApi from "../../Hooks/usePostFetchApi";
 
 const NewPost = () => {
   const [form, setForm] = useState({
     content: "",
   });
-  // const { data, loading, fetchData } = useFetchApi("posts", "POST");
+  const { data, loading, fetchData } = usePostFetchApi();
 
   const handleChange = (value) => {
     if (value) {
@@ -13,9 +13,10 @@ const NewPost = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    //  TODO
+    const url = `http://localhost:7777/posts`;
+    fetchData(url, form);
   };
 
   return (

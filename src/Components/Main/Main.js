@@ -1,8 +1,8 @@
-import useFetchApi from "../../Hooks/useFetchApi";
+import useGetFetchApi from "../../Hooks/useGetFetchApi";
 import Post from "../Post/Post";
 
 const Main = () => {
-  const { data, loading } = useFetchApi("posts");
+  const { data, loading } = useGetFetchApi("posts");
 
   if (loading) {
     return <progress></progress>;
