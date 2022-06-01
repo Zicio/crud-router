@@ -1,36 +1,61 @@
 import { useState } from "react";
-import usePostFetchApi from "../../Hooks/usePostFetchApi";
+import { useNavigate } from "react-router-dom";
+import fetchApi from "../../fetchApi";
 
 const NewPost = () => {
   const [form, setForm] = useState({
     content: "",
   });
-  const { data, loading, fetchData } = usePostFetchApi();
 
-  const handleChange = (value) => {
+  let navigate = useNavigate();
+
+  const handleChange = (name, value) => {
     if (value) {
-      setForm(value);
+      setForm((prevForm) => ({ ...prevForm, [name]: value }));
     }
+    console.log(form);
   };
 
-  const handleSubmit = (e) => {
+  const onChange = ({ target }) => {
+    const name = target.name;
+    const value = target.value;
+    handleChange(name, value);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = `http://localhost:7777/posts`;
-    fetchData(url, form);
+    if (form.content) {
+      const data = {
+        id: 0,
+        content: form.content,
+      };
+      const response = await fetchApi("POST", data);
+      if (response.status === 204) {
+        setForm({
+          content: "",
+        });
+        navigate("/crud-router/");
+      }
+    }
   };
 
   return (
     <div className="new-post">
-      <form onSubmit={handleSubmit}>
+      <form id="post" onSubmit={handleSubmit}>
         <textarea
           name="content"
           cols="30"
           rows="10"
+          type="text"
           placeholder="Напишите здесь"
-          minlength="5"
+          minLength="5"
+          value={form.content}
           required
-          onChange={handleChange}
+          onChange={onChange}
         ></textarea>
+        <button className="form-submit" type="submit">
+          Опубликовать
+        </button>
       </form>
     </div>
   );

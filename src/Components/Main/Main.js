@@ -1,5 +1,6 @@
 import useGetFetchApi from "../../Hooks/useGetFetchApi";
 import Post from "../Post/Post";
+import { NavLink } from "react-router-dom";
 
 const Main = () => {
   const { data, loading } = useGetFetchApi("posts");
@@ -10,9 +11,11 @@ const Main = () => {
   return (
     <>
       <div className="create-container">
-        <button className="create" type="submit">
-          Создать Пост
-        </button>
+        <NavLink to="/crud-router/posts/new">
+          <button className="create" type="submit">
+            Создать Пост
+          </button>
+        </NavLink>
       </div>
       <main className="posts-container">
         {data.map((el) => {
