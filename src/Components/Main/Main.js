@@ -17,11 +17,11 @@ const Main = () => {
           </button>
         </NavLink>
       </div>
-      <main className="posts-container">
+      <ul className="posts-container">
         {data.map((el) => {
           return <Post key={el.id} data={el} />;
         })}
-      </main>
+      </ul>
     </>
   );
 };

@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import fetchApi from "../../fetchApi";
 
 const NewPost = () => {
-  const [form, setForm] = useState({
-    content: "",
-  });
+  const [form, setForm] = useState(
+    localStorage.message
+      ? JSON.parse(localStorage.message)
+      : {
+          content: "",
+        }
+  );
 
   let navigate = useNavigate();
 
@@ -34,9 +38,16 @@ const NewPost = () => {
         setForm({
           content: "",
         });
+        localStorage.clear();
         navigate("/crud-router/");
       }
     }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate("/crud-router/");
+    localStorage.message = JSON.stringify(form);
   };
 
   return (
@@ -57,6 +68,9 @@ const NewPost = () => {
           Опубликовать
         </button>
       </form>
+      <button className="close" type="button" onClick={handleClick}>
+        X
+      </button>
     </div>
   );
 };
