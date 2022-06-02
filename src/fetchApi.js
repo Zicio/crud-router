@@ -15,7 +15,7 @@ const fetchApi = async (method, data, id) => {
       break;
     }
     case "DELETE":
-      const newUrl = new URL("http://localhost:7777/notes");
+      const newUrl = new URL(url);
       newUrl.searchParams.set("id", `${id}`);
       response = await fetch(newUrl, {
         method: "DELETE",

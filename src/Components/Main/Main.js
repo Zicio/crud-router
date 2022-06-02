@@ -3,7 +3,7 @@ import Post from "../Post/Post";
 import { NavLink } from "react-router-dom";
 
 const Main = () => {
-  const { data, loading } = useGetFetchApi("posts");
+  const { data, loading } = useGetFetchApi();
 
   if (loading) {
     return <progress></progress>;
