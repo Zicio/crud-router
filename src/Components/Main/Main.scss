@@ -1,0 +1,25 @@
+$border: 1px solid black;
+$padding: 10px 20px;
+
+.create-container {
+  padding: $padding;
+  display: flex;
+  justify-content: end;
+  background-color: white;
+
+  .create-button {
+    all: unset;
+    padding: $padding;
+    background-color: blue;
+    color: white;
+  }
+}
+
+.posts-list {
+  list-style-type: none;
+  margin-top: 25px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 25px;
+}

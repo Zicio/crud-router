@@ -1,0 +1,8 @@
+html {
+  background-color: lightblue;
+}
+
+.app {
+  margin: 40px;
+  min-width: 600px;
+}
