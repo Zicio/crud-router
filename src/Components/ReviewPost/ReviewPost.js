@@ -11,9 +11,9 @@ const ReviewPost = () => {
 
   let navigate = useNavigate();
 
-  const { data, loading } = useGetFetchApi(id);
+  const { data, loading, fetchData, url } = useGetFetchApi(id); // Хук отправки запроса отдельного поста
 
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(false); //  Состояние для переключения между детальным просмотром отдельного поста и формой его редактирования
 
   const [form, setForm] = useState({
     content: "",
@@ -37,7 +37,16 @@ const ReviewPost = () => {
     return <progress></progress>;
   }
   if (edit) {
-    return <NewPost data={data} changeForm={setForm} changedForm={form} />;
+    return (
+      <NewPost
+        data={data}
+        changeForm={setForm}
+        changedForm={form}
+        changeEdit={setEdit}
+        fetchData={fetchData}
+        url={url}
+      />
+    );
   }
   return (
     <DetailedPost

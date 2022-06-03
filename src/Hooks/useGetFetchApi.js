@@ -20,7 +20,7 @@ const useGetFetchApi = (id) => {
   useEffect(() => {
     fetchData(url);
   }, []);
-  return { ...status, fetchData };
+  return { ...status, fetchData, url };
 };
 
 export default useGetFetchApi;

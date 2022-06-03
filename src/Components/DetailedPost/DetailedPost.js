@@ -1,7 +1,9 @@
 import AuthorInfo from "../AuthorInfo/AuthorInfo";
+import { NavLink } from "react-router-dom";
 
 const DetailedPost = (props) => {
   const { data, onClickEdit, onClickDelete } = props;
+
   return (
     <div className="post-detailed">
       <AuthorInfo data={data} date />
@@ -13,6 +15,11 @@ const DetailedPost = (props) => {
         <button className="delete" type="submit" onClick={onClickDelete}>
           Удалить
         </button>
+        <NavLink to="/crud-router/">
+          <button className="return" type="submit">
+            Назад к списку
+          </button>
+        </NavLink>
       </div>
     </div>
   );

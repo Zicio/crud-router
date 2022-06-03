@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchApi from "../../fetchApi";
 import AuthorInfo from "../AuthorInfo/AuthorInfo";
 
 const NewPost = (props) => {
-  const { data, changeForm, changedForm } = props;
+  const { data, changeForm, changedForm, changeEdit, fetchData, url } = props; // Пропсы передаются при изменении поста. При создании нового - пропсы пустые
+  const checkProps = Object.keys(props).length; //Переменная для проверки наличия пропсов, т.е. для каких целей создается компонент
 
   const СhoosingFormValue = () => {
-    if (changedForm) {
+    if (checkProps) {
       return changedForm;
     }
     if (localStorage.message) {
@@ -27,18 +28,17 @@ const NewPost = (props) => {
     const value = target.value;
     if (value) {
       setForm((prevForm) => ({ ...prevForm, [name]: value }));
-      if (changedForm) {
+      if (checkProps) {
         changeForm(form);
       }
     }
-    console.log(form);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.content) {
       const newData = {
-        id: data.id || 0,
+        id: data ? data.id : 0,
         content: form.content,
       };
       const response = await fetchApi("POST", newData);
@@ -46,23 +46,34 @@ const NewPost = (props) => {
         setForm({
           content: "",
         });
-        localStorage.clear();
-        navigate("/crud-router/");
+        if (!checkProps) {
+          localStorage.clear();
+          navigate("/crud-router/");
+        } else {
+          fetchData(url);
+          changeEdit(false);
+        }
       }
     }
   };
 
-  const handleClick = (e) => {
+  const handleClickClose = (e) => {
     e.preventDefault();
-    if (!changedForm) {
+    if (!checkProps) {
       localStorage.message = JSON.stringify(form);
       navigate("/crud-router/");
+    } else {
+      changeEdit(false);
     }
-    // TODO не работает откат к просмотру карточки
   };
 
   return (
     <div className="new-post">
+      <div className="title-container">
+        <h3 className="title">
+          {checkProps ? "Редактировать" : "Создать"} публикацию
+        </h3>
+      </div>
       {data && <AuthorInfo data={data} />}
       <form id="post" onSubmit={handleSubmit}>
         <textarea
@@ -79,10 +90,10 @@ const NewPost = (props) => {
         <button className="form-submit" type="submit">
           Опубликовать
         </button>
+        <button className="close" type="button" onClick={handleClickClose}>
+          X
+        </button>
       </form>
-      <button className="close" type="button" onClick={handleClick}>
-        X
-      </button>
     </div>
   );
 };

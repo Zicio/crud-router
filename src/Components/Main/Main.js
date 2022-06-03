@@ -11,6 +11,7 @@ const Main = () => {
   return (
     <>
       <div className="create-container">
+        {/* Ссылка на создание нового поста */}
         <NavLink to="/crud-router/posts/new">
           <button className="create" type="submit">
             Создать Пост

@@ -3,10 +3,6 @@ const fetchApi = async (method, data, id) => {
   let response;
   // eslint-disable-next-line default-case
   switch (method) {
-    case "GET": {
-      response = await fetch(url);
-      break;
-    }
     case "POST": {
       response = await fetch(url, {
         method: "POST",
