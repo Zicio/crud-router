@@ -1,3 +1,4 @@
+import "./NewPost.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchApi from "../../fetchApi";
@@ -75,10 +76,10 @@ const NewPost = (props) => {
         </h3>
       </div>
       {data && <AuthorInfo data={data} />}
-      <form id="post" onSubmit={handleSubmit}>
+      <form className="form" id="post" onSubmit={handleSubmit}>
         <textarea
           name="content"
-          cols="30"
+          cols="60"
           rows="10"
           type="text"
           placeholder="Напишите здесь"
@@ -90,8 +91,8 @@ const NewPost = (props) => {
         <button className="form-submit" type="submit">
           Опубликовать
         </button>
-        <button className="close" type="button" onClick={handleClickClose}>
-          X
+        <button className="form-close" type="button" onClick={handleClickClose}>
+          🞫
         </button>
       </form>
     </div>

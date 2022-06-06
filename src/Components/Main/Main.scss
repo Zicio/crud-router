@@ -7,11 +7,16 @@ $padding: 10px 20px;
   justify-content: end;
   background-color: white;
 
-  .create-button {
-    all: unset;
-    padding: $padding;
-    background-color: blue;
-    color: white;
+  a {
+    text-decoration: none;
+
+    .create-button {
+      all: unset;
+      padding: $padding;
+      background-color: blue;
+      color: white;
+      text-decoration: none;
+    }
   }
 }
 

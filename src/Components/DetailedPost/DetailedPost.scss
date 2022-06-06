@@ -1,0 +1,27 @@
+.buttons-panel {
+  margin-top: 30px;
+  display: flex;
+  justify-content: end;
+
+  button {
+    all: unset;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .edit {
+    background-color: blue;
+    color: white;
+  }
+
+  .delete {
+    background-color: red;
+    color: white;
+    margin-left: 10px;
+  }
+
+  a {
+    background-color: gray;
+    margin-left: 10px;
+  }
+}
